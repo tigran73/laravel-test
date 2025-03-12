@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class News extends Model
 {
@@ -12,4 +13,9 @@ class News extends Model
         'image',
         'author'
     ];
+
+    public function authorUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author');
+    }
 }
