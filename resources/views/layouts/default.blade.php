@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-@include('header')
+@include('partials.header')
 </header>
 
 <main>
@@ -20,7 +20,7 @@
 </main>
 
 <footer>
-@include('footer')
+@include('partials.footer')
 </footer>
 
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
