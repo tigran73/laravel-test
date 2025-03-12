@@ -14,10 +14,11 @@ class NewsRepository extends BaseRepository implements NewsRepositoryInterface
         parent::__construct($model);
     }
 
-    public function paginate(int $count)
+    public function paginate(int $count, int $page = 1)
     {
-        return $this->model->orderBy('updated_at', 'DESC')->paginate($count);
+        return $this->model->orderBy('updated_at', 'DESC')->paginate($count, ['*'], 'page', $page);
     }
+
 
     public function findWith(int $id)
     {

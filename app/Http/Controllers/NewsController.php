@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    protected $newsRepository;
+    protected NewsRepositoryInterface $newsRepository;
 
     public function __construct(NewsRepositoryInterface $newsRepository)
     {
@@ -38,5 +38,25 @@ class NewsController extends Controller
         return view('news.detail', [
             'post' => $post
         ]);
+    }
+
+    public function newsAjax(int $page, int $count)
+    {
+        $news = $this->newsRepository->paginate($count, $page);
+
+        $news->getCollection()->transform(function ($item) {
+
+
+            if ($item->updated_at) $item->updated_at_formatted = $item->updated_at->format('d.m.Y H:i');
+
+            $item->created_at_formatted = $item->updated_at->format('d.m.Y H:i');
+
+            $item->link = route('news.detail', ['id' => $item->id]);
+            $item->image_link = asset('img/'.$item->image);
+
+            return $item;
+        });
+
+        return response()->json($news);
     }
 }

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{id}', [NewsController::class, 'detail'])->name('news.detail');
 
+Route::get('/api/news/{page}/{count}', [NewsController::class, 'newsAjax']);
+
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
