@@ -22,4 +22,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'registrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/account', [AccountController::class, 'index'])->name('account')->middleware('auth');;
+Route::get('/account', [AccountController::class, 'index'])->name('account')->middleware('auth');
+Route::get('/password', [AccountController::class, 'password'])->name('password')
+    ->middleware('auth');
+Route::post('/change-password', [AccountController::class, 'changePassword'])->name('changePassword')
+    ->middleware('auth');;

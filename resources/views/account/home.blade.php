@@ -16,7 +16,7 @@
 
         <h4>Actions:</h4>
         <ul class="list-unstyled">
-            <li><a href="">Change password</a></li>
+            <li><a href="{{ route('password') }}">Change password</a></li>
             <li><a href="">Add news</a></li>
             <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
