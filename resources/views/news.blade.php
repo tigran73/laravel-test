@@ -21,7 +21,7 @@
                         <h2 class="mb-2">{{ $item->name }}</h2>
 
                         @if (Str::startsWith($item->image, 'newsImage/'))
-                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}">
+                            <img src="{{ asset('storage/'.$item->image) }}" alt="{{ $item->name }}" class="img-fluid mb-2">
                         @else
                             <img src="{{ asset('img/'.$item->image) }}" alt="{{ $item->name }}" class="img-fluid mb-2">
                         @endif

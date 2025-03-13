@@ -15,7 +15,12 @@
         <a href="{{ url()->previous() }}">&larr;Back</a>
         <div class="row pt-5">
             <div class="col-12">
-                <img src="{{ asset('img/' . $post->image) }}" alt="{{ $post->name }}" class="img-fluid mb-3">
+                @if (Str::startsWith($post->image, 'newsImage/'))
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->name }}" class="img-fluid mb-2">
+                @else
+                    <img src="{{ asset('img/' . $post->image) }}" alt="{{ $post->name }}" class="img-fluid mb-3">
+                @endif
+
                 <h1 class="mb-2">{{ $post->name }}</h1>
                 <h4 class="mb-3">{{ $post->authorUser->login }}</h4>
                 <p class="border-top pt-3">
