@@ -36,12 +36,37 @@
                     @endif
                     <div class="mb-3">
                         <label for="login" class="form-label">Login</label>
-                        <input type="text" class="form-control" id="login" value="{{ $user->login }}" @if($edit) disabled @else name="login" @endif>
+                        <input type="text" class="form-control" id="login" value="{{ old('login') ?? $user->login }}" @if($edit) disabled @else name="login" @endif>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-label">Roles:</div>
+                        @foreach($roles as $role)
+                            <div class="form-check mb-1">
+                                <input class="form-check-input" type="checkbox"
+                                       value="{{ $role->id }}" id="role-{{ $role->id }}"
+                                       name="roles[]"
+                                       @if($user->roles->contains('id', $role->id)) checked @endif>
+                                <label class="form-check-label" for="role-{{ $role->id }}">
+                                    {{ $role->name }} ({{ $role->desc }})
+                                </label>
+                            </div>
+                        @endforeach
+                        @if ($errors->has('roles.*'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->get('roles.*') as $error)
+                                       @foreach($error as $item)
+                                            <li>{{$item}}</li>
+                                        @endforeach
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">New password</label>
                         <input type="password" class="form-control @error('password') is-invalid @enderror"
-                               id="password" name="password" required autocomplete="password">
+                               id="password" name="password" autocomplete="password" @if(!$edit) required @endif>
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -51,7 +76,7 @@
                     <div class="mb-3">
                         <label for="confirmed_password" class="form-label">Confirmed new password</label>
                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
-                               id="confirmed_password" name="password_confirmation" required autocomplete="confirmed_password">
+                               id="confirmed_password" name="password_confirmation" autocomplete="confirmed_password" @if(!$edit) required @endif>
                     </div>
                     <button type="submit" class="btn btn-primary w-100 mb-3">@if($edit) Save @else Create @endif</button>
                 </form>
