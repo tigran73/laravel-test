@@ -42,8 +42,6 @@ Route::post('/store-news', [AccountController::class, 'storeNews'])->name('store
 Route::get('/admin', [AdminController::class, 'index'])->name('admin')
     ->middleware(['role:admin', 'role:content-manager']);
 
-/*Route::get('/admin/users', [UserController::class, 'index'])->name('users')
-    ->middleware('role:admin');*/
 
 Route::group(['middleware' => 'role:admin'], function() {
     Route::resources([
