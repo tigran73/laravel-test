@@ -22,7 +22,8 @@ class NewsSeed extends Seeder
                 'name' => fake()->realText(50),
                 'description' => fake()->realText(),
                 'image' => 'img.png',
-                'author' => 2,
+                'author' => rand(1,2),
+                'views' => rand(10,100),
                 'created_at' => now(),
                 'updated_at' => Carbon::now()->addDays($i),
             ];

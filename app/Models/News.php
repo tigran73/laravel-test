@@ -11,7 +11,8 @@ class News extends Model
         'name',
         'description',
         'image',
-        'author'
+        'author',
+        'views'
     ];
 
     public function authorUser(): BelongsTo

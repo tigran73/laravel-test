@@ -21,6 +21,8 @@ class AccountController extends Controller
 
     public function index()
     {
+
+        //dd(auth()->user()->load('roles'));
         return view('account.home');
     }
 

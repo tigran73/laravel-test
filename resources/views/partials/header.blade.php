@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     @auth
                         <a class="nav-link" href="{{ route('account') }}">{{ \Auth::user()->login }}</a>
-                    @elseauth
+                    @else
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     @endauth
                 </li>
