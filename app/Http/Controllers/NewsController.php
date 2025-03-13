@@ -52,7 +52,13 @@ class NewsController extends Controller
             $item->created_at_formatted = $item->updated_at->format('d.m.Y H:i');
 
             $item->link = route('news.detail', ['id' => $item->id]);
-            $item->image_link = asset('img/'.$item->image);
+
+            if (\Str::startsWith($item->image, 'newsImage/')){
+                $item->image_link = asset('storage/'.$item->image);
+            }else{
+                $item->image_link = asset('img/'.$item->image);
+            }
+
 
             return $item;
         });

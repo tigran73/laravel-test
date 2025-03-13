@@ -19,7 +19,13 @@
                 <div class="col-12 mb-5 p-3 border rounded news-item">
                     <a href="{{ route('news.detail', ['id' => $item->id]) }}">
                         <h2 class="mb-2">{{ $item->name }}</h2>
-                        <img src="{{ asset('img/'.$item->image) }}" alt="{{ $item->name }}" class="img-fluid mb-2">
+
+                        @if (Str::startsWith($item->image, 'newsImage/'))
+                            <img src="{{ asset($item->image) }}" alt="{{ $item->name }}">
+                        @else
+                            <img src="{{ asset('img/'.$item->image) }}" alt="{{ $item->name }}" class="img-fluid mb-2">
+                        @endif
+
                         <div class="text-end">{{ $item->updated_at->format('d.m.Y H:i') ?? $item->created_at('d.m.Y H:i') }}</div>
                     </a>
                 </div>

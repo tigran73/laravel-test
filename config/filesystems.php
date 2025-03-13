@@ -46,6 +46,14 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'newsImage' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage/newsImage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

@@ -23,7 +23,13 @@ Route::get('/register', [RegisterController::class, 'registrationForm'])->name('
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/account', [AccountController::class, 'index'])->name('account')->middleware('auth');
+
 Route::get('/password', [AccountController::class, 'password'])->name('password')
     ->middleware('auth');
 Route::post('/change-password', [AccountController::class, 'changePassword'])->name('changePassword')
-    ->middleware('auth');;
+    ->middleware('auth');
+
+Route::get('/add-news', [AccountController::class, 'addNews'])->name('addNews')
+    ->middleware('auth');
+Route::post('/store-news', [AccountController::class, 'storeNews'])->name('storeNews')
+    ->middleware('auth');
