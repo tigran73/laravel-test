@@ -2,20 +2,21 @@
 
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
 //    return view('welcome');
 //});
 
-Route::get('/', [NewsController::class, 'index'])->name('news');
-Route::get('/news/{id}', [NewsController::class, 'detail'])->name('news.detail');
+Route::get('/', [HomeController::class, 'index'])->name('news');
+Route::get('/news/{id}', [HomeController::class, 'detail'])->name('news.detail');
 
-Route::get('/api/news/{page}/{count}', [NewsController::class, 'newsAjax']);
+Route::get('/api/news/{page}/{count}', [HomeController::class, 'newsAjax']);
 
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -46,6 +47,13 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin')
 
 Route::group(['middleware' => 'role:admin'], function() {
     Route::resources([
-        'admin/users' => UserController::class
+        'admin/users' => UserController::class,
     ]);
+});
+
+Route::group(['middleware' => 'role:content-manager'], function() {
+    Route::resources([
+        'admin/news' => NewsController::class,
+    ]);
+    Route::get('/api/admin/news/{page}/{count}', [NewsController::class, 'paginate']);
 });

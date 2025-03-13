@@ -74,7 +74,7 @@
                 <li><a href="{{ route('users.index') }}">Users</a></li>
             @endif
             @if(Auth::user()->hasRole('content-manager'))
-                <li><a href="{{ route('addNews') }}">Add news</a></li>
+                <li><a href="{{ route('news.index') }}">News</a></li>
             @endif
             <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>

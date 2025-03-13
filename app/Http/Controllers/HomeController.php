@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\News\NewsRepositoryInterface;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class HomeController extends Controller
 {
     protected NewsRepositoryInterface $newsRepository;
 

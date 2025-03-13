@@ -51,7 +51,7 @@ class UserController extends Controller
         $user = $this->userRepository->find($user->id);
 
         if (!$user){
-            return redirect()->route('password')->with('error', 'User not found!');
+            return redirect()->route('users.index')->with('error', 'User not found!');
         }
 
         $user->fill([
@@ -63,9 +63,9 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Password changed!');
     }
 
-    public function destroy(User $user)
+    public function destroy($user)
     {
-        $user = $this->userRepository->find($user->id);
+        $user = $this->userRepository->find($user);
 
         if (!$user){
             return redirect()->route('users.index')->with('error', 'User not found!');

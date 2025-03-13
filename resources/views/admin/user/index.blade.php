@@ -12,6 +12,7 @@
 
 @section('content')
     <div class="container py-5">
+        <a href="{{ route('admin') }}">&larr;Back</a>
         <div class="d-flex align-items-center justify-content-between">
             <h1>Users</h1>
             <a href="{{ route('users.create') }}" class="btn btn-primary">Create</a>
