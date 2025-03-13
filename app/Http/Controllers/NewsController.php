@@ -14,11 +14,13 @@ class NewsController extends Controller
         $this->newsRepository = $newsRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $news = $this->newsRepository->paginate(4);
 
-        //dd($news);
+        $page = $request->query('page') ?? 1;
+
+        $news = $this->newsRepository->paginate(4, $page);
+
 
         return view('news', [
             'news' => $news

@@ -39,6 +39,12 @@ pagination_links.on('click', function (e) {
                 html += '</div>';
             }
 
+            if (history.pushState) {
+                let baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                let newUrl = baseUrl + '?page='+ page;
+                history.pushState(null, null, newUrl);
+            }
+
             $('.news-block').html(html)
         },
         error: function (xhr, ajaxOptions, thrownError) {
