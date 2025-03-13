@@ -19,6 +19,13 @@ class NewsRepository extends BaseRepository implements NewsRepositoryInterface
         return $this->model->orderBy('updated_at', 'DESC')->paginate($count, ['*'], 'page', $page);
     }
 
+    public function paginateWith(int $count, int $page = 1)
+    {
+        return $this->model->orderBy('updated_at', 'DESC')
+            ->with(['authorUser'])
+            ->paginate($count, ['*'], 'page', $page);
+    }
+
 
     public function findWith(int $id)
     {

@@ -13,7 +13,7 @@ pagination_links.on('click', function (e) {
 
     $.ajax({
         type: 'GET',
-        url: app_url + `/api/news/${page}/${count}`,
+        url: app_url + `/front-api/news/${page}/${count}`,
         success:function(pagination){
             let data = pagination.data
 

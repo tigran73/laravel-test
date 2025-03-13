@@ -20,7 +20,6 @@ class AdminNewsResource extends JsonResource
             'link_show' => $this->link_show,
             'link_edit' => $this->link_edit,
             'link_delete' => $this->link_delete,
-
         ];
     }
 }

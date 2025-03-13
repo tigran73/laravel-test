@@ -25,7 +25,7 @@ class NewsSeed extends Seeder
                 'author' => rand(1,2),
                 'views' => rand(10,100),
                 'created_at' => now(),
-                'updated_at' => now(),
+                'updated_at' => Carbon::now()->addMinutes($i)
             ];
         }
         DB::table('news')->insert($news);
