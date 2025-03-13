@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\NewsController;
@@ -22,7 +23,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'registrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/account', [AccountController::class, 'index'])->name('account')->middleware('auth');
+Route::get('/account', [AccountController::class, 'index'])->name('account')
+    ->middleware('auth');
 
 Route::get('/password', [AccountController::class, 'password'])->name('password')
     ->middleware('auth');
@@ -30,6 +32,10 @@ Route::post('/change-password', [AccountController::class, 'changePassword'])->n
     ->middleware('auth');
 
 Route::get('/add-news', [AccountController::class, 'addNews'])->name('addNews')
-    ->middleware('auth');
+    ->middleware(['role:admin', 'role:content-manager']);
 Route::post('/store-news', [AccountController::class, 'storeNews'])->name('storeNews')
-    ->middleware('auth');
+    ->middleware(['role:admin', 'role:content-manager']);
+
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin')
+    ->middleware(['role:admin', 'role:content-manager']);

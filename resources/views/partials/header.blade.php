@@ -15,7 +15,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     @auth
-                        <a class="nav-link" href="{{ route('account') }}">{{ \Auth::user()->login }}</a>
+                        <a class="nav-link" href="{{ route('account') }}">{{ Auth::user()->login }}</a>
                     @else
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     @endauth

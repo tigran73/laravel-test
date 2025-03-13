@@ -25,4 +25,19 @@ class NewsRepository extends BaseRepository implements NewsRepositoryInterface
         return $this->model->with(['authorUser'])
                             ->find($id);
     }
+
+    public function topViews(int $count)
+    {
+        return $this->model->orderBy('views', 'DESC')->limit($count)->get();
+    }
+
+    public function topAuthors(int $count)
+    {
+        return $this->model
+            ->select('author', \DB::raw('COUNT(*) as news_count'))
+            ->groupBy('author')
+            ->orderByDesc('news_count')
+            ->limit($count)
+            ->get();
+    }
 }

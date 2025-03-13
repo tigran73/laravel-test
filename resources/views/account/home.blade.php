@@ -12,12 +12,14 @@
 
 @section('content')
     <div class="container py-5">
-        <h1>{{ \Auth::user()->login }}</h1>
+        <h1>{{ Auth::user()->login }}</h1>
 
         <h4>Actions:</h4>
         <ul class="list-unstyled">
             <li><a href="{{ route('password') }}">Change password</a></li>
+            @if(Auth::user()->hasRole('content-manager'))
             <li><a href="{{ route('addNews') }}">Add news</a></li>
+            @endif
             <li><a href="{{ route('logout') }}">Logout</a></li>
         </ul>
     </div>
