@@ -21,8 +21,6 @@ class AccountController extends Controller
 
     public function index()
     {
-
-        //dd(auth()->user()->load('roles'));
         return view('account.home');
     }
 
@@ -52,35 +50,4 @@ class AccountController extends Controller
         return redirect()->route('password')->with('success', 'Password changed!');
     }
 
-
-    public function addNews()
-    {
-        return view('account.add-news');
-    }
-
-    public function storeNews(Request $request)
-    {
-
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'image' => ['required', 'image', 'mimes:jpg,png,webp', 'max:5120'],
-        ]);
-
-
-        $file = $request->file('image');
-        $path = $file->store('newsImage', 'newsImage');
-
-
-        $data['name'] = $request->name;
-        $data['description'] = $request->description;
-        $data['image'] = $path;
-        $data['author'] = \Auth::id();
-        $data['created_at'] = now();
-
-        $news = $this->newsRepository->create($data);
-
-
-        return redirect()->route('addNews')->with('success', 'News added!');
-    }
 }

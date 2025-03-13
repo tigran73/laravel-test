@@ -12,8 +12,7 @@
 
 @section('content')
     <div class="container py-5">
-        <div class="d-flex align-items-center justify-content-between">
-            <h1> Login: {{ $user->login }}</h1>
-        </div>
+        <a href="{{ url()->previous() }}">&larr;Back</a>
+        <h1> Login: {{ $user->login }}</h1>
     </div>
 @endsection

@@ -12,6 +12,7 @@
 
 @section('content')
     <div class="container py-5">
+        <a href="{{ url()->previous() }}">&larr;Back</a>
         <h1>@if($edit)Edit Users @else Create Users @endif</h1>
 
         <div class="row">

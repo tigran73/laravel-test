@@ -39,19 +39,15 @@ Route::post('/store-news', [AccountController::class, 'storeNews'])->name('store
     ->middleware(['role:admin', 'role:content-manager']);
 
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin')
+Route::get('/admin-panel', [AdminController::class, 'index'])->name('admin')
     ->middleware(['role:admin', 'role:content-manager']);
 
+Route::resource('admin/users', UserController::class)
+    ->middleware('role:admin');
 
-Route::group(['middleware' => 'role:admin'], function() {
-    Route::resources([
-        'admin/users' => UserController::class,
-    ]);
-});
+Route::resource('admin/news', NewsController::class)
+    ->middleware('role:content-manager');
 
-Route::group(['middleware' => 'role:content-manager'], function() {
-    Route::resources([
-        'admin/news' => NewsController::class,
-    ]);
-    Route::get('/api/admin/news/{page}/{count}', [NewsController::class, 'paginate']);
-});
+Route::get('/api/admin/news/{page}/{count}', [NewsController::class, 'paginate'])
+    ->middleware('role:content-manager');
+

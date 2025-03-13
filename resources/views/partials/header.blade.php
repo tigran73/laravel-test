@@ -13,9 +13,11 @@
             </ul>
 
             <ul class="navbar-nav">
-                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('content-manager'))
-                    <a class="nav-link" href="{{ route('admin') }}">Admin panel</a>
-                @endif
+                @auth
+                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('content-manager'))
+                        <a class="nav-link" href="{{ route('admin') }}">Admin panel</a>
+                    @endif
+                @endauth
                 <li class="nav-item">
                     @auth
                         <a class="nav-link" href="{{ route('account') }}">{{ Auth::user()->login }}</a>
