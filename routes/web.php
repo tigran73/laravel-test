@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\NewsController;
@@ -39,3 +40,12 @@ Route::post('/store-news', [AccountController::class, 'storeNews'])->name('store
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin')
     ->middleware(['role:admin', 'role:content-manager']);
+
+/*Route::get('/admin/users', [UserController::class, 'index'])->name('users')
+    ->middleware('role:admin');*/
+
+Route::group(['middleware' => 'role:admin'], function() {
+    Route::resources([
+        'admin/users' => UserController::class
+    ]);
+});

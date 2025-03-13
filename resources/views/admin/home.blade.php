@@ -19,7 +19,7 @@
         <div class="row mb-5">
             <div class="col-6">
                 <h5>Top News</h5>
-                <table class="table">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -37,7 +37,7 @@
                                    target="_blank">{{$item->name}}</a>
                             </td>
                             <td>{{$item->views}}</td>
-                            <td>{{ $item->authorUser->login  }}</td>
+                            <td>{{ $item->authorUser->login ?? 'deleted' }}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-6">
                 <h5>Top Authors</h5>
-                <table class="table">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -58,7 +58,7 @@
                         <tr>
                             <th scope="row">{{$key + 1}}</th>
                             <td>
-                                {{$item->authorUser->login}}
+                                {{$item->authorUser->login ?? 'deleted' }}
                             </td>
                             <td>{{ $item->news_count  }}</td>
                         </tr>
@@ -70,8 +70,8 @@
 
         <h4>Actions:</h4>
         <ul class="list-unstyled">
-            @if(Auth::user()->hasRole('content-manager'))
-                <li><a href="{{ route('addNews') }}">Add news</a></li>
+            @if(Auth::user()->hasRole('admin'))
+                <li><a href="{{ route('users.index') }}">Users</a></li>
             @endif
             @if(Auth::user()->hasRole('content-manager'))
                 <li><a href="{{ route('addNews') }}">Add news</a></li>
