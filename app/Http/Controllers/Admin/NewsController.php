@@ -10,6 +10,7 @@ use App\Models\News;
 use App\Repositories\News\NewsRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class NewsController extends Controller
@@ -64,10 +65,16 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $storeNewsRequest)
     {
-        $data = $storeNewsRequest->only(['name', 'description', 'author']);
+        $data = $storeNewsRequest->only(['name', 'description']);
 
         $path = $storeNewsRequest->file('image')->store('newsImage', 'newsImage');
         $data['image'] = $path;
+
+        if ($storeNewsRequest->has('author') && Auth::user()->hasRole('admin')){
+            $data['author'] = $storeNewsRequest->author;
+        }else{
+            $data['author'] = Auth::user()->id;
+        }
 
         $this->newsRepository->create($data);
 
@@ -82,12 +89,15 @@ class NewsController extends Controller
             return redirect()->route('news.index')->with('error', 'News not found!');
         }
 
-
-        $data = $updateNewsRequest->only(['name', 'description', 'author']);
+        $data = $updateNewsRequest->only(['name', 'description']);
 
         if ($updateNewsRequest->hasFile('image')) {
             $path = $updateNewsRequest->file('image')->store('newsImage', 'newsImage');
             $data['image'] = $path;
+        }
+
+        if ($updateNewsRequest->has('author') && Auth::user()->hasRole('admin')){
+            $data['author'] = $updateNewsRequest->author;
         }
 
         $news->fill($data);

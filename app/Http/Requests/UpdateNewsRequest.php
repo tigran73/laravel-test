@@ -25,7 +25,7 @@ class UpdateNewsRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'author' => ['required', 'exists:users,id'],
+            'author' => ['exists:users,id'],
             'image' => ['image', 'mimes:jpg,png,webp', 'max:5120']
         ];
     }

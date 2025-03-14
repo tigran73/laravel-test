@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    protected $newsRepository;
+    protected NewsRepositoryInterface $newsRepository;
 
     public function __construct(NewsRepositoryInterface $newsRepository)
     {

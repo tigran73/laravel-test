@@ -35,7 +35,11 @@ class HomeController extends Controller
             return redirect()->route('news');
         }
 
+        $post->fill([
+            'views' => $post->views + 1
+        ]);
 
+        $post->save();
 
         return view('news.detail', [
             'post' => $post

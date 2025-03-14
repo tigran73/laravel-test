@@ -26,7 +26,11 @@
                 <p class="border-top pt-3">
                     {{ $post->description }}
                 </p>
-                <div class="text-end">{{ $post->updated_at ?? $post->created_at }}</div>
+                <div class="text-end">
+                    {{ $post->updated_at ?? $post->created_at }}
+                    <br>
+                    Views: {{ $post->views }}
+                </div>
             </div>
         </div>
 

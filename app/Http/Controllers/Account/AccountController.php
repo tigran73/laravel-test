@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNewsRequest;
 use App\Repositories\News\NewsRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -28,6 +29,29 @@ class AccountController extends Controller
     {
         return view('account.change-password');
     }
+
+    public function addNews()
+    {
+        return view('account.add-news');
+    }
+
+    public function storeNews(StoreNewsRequest $storeNewsRequest)
+    {
+        $file = $storeNewsRequest->file('image');
+        $path = $file->store('newsImage', 'newsImage');
+
+        $data = $storeNewsRequest->only(['name', 'description']);
+
+        $data['image'] = $path;
+        $data['author'] = \Auth::id();
+        $data['created_at'] = now();
+
+        $this->newsRepository->create($data);
+
+
+        return redirect()->route('addNews')->with('success', 'News added!');
+    }
+
 
     public function changePassword(Request $request)
     {

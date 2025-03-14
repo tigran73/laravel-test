@@ -34,14 +34,12 @@ Route::get('/password', [AccountController::class, 'password'])->name('password'
 Route::post('/change-password', [AccountController::class, 'changePassword'])->name('changePassword')
     ->middleware('auth');
 
-Route::get('/add-news', [AccountController::class, 'addNews'])->name('addNews')
-    ->middleware(['role:admin', 'role:content-manager']);
-Route::post('/store-news', [AccountController::class, 'storeNews'])->name('storeNews')
-    ->middleware(['role:admin', 'role:content-manager']);
+Route::get('/add-news', [AccountController::class, 'addNews'])->name('addNews');
+Route::post('/store-news', [AccountController::class, 'storeNews'])->name('storeNews');
 
 
 Route::get('/admin-panel', [AdminController::class, 'index'])->name('admin')
-    ->middleware(['role:admin', 'role:content-manager']);
+    ->middleware('role:admin,content-manager');
 
 Route::resource('admin/users', UserController::class)
     ->middleware('role:admin');

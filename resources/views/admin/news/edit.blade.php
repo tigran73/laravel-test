@@ -54,6 +54,8 @@
                                 </span>
                         @enderror
                     </div>
+
+                    @if(Auth::user()->hasRole('admin'))
                     <div class="mb-3">
                         <label for="author" class="form-label">Author</label>
                         <select id="author" class="form-select @error('description') is-invalid @enderror" name="author" aria-label="Default select example">
@@ -68,6 +70,7 @@
                                 </span>
                         @enderror
                     </div>
+                    @endif
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Image</label>
                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="formFile" name="image"
